@@ -42,7 +42,7 @@ public class EquationSolver {
 		if (equation == null || equation.trim().isEmpty())
 			return "Invalid";
 
-		int x = 0, vars = 0;
+		int x = 0, y = 0;
 		String sign = "";
 		boolean left = true;
 
@@ -52,25 +52,29 @@ public class EquationSolver {
 
 			if (isX(equation, i)) {
 				x += add(sign, "1", !left);
-			} else if (Character.isDigit(equation.charAt(i))) {
-				if (equation.length() > i + 1 && isX(equation, i + 1)) {
-					x += add(sign, "" + equation.charAt(i), !left);
-					++i;
-				} else if (equation.length() > i + 1 && Character.isDigit(equation.charAt(i + 1))) {
-					vars += add(sign, "" + equation.charAt(i) + equation.charAt(i + 1), left);
-					++i;
-				} else
-					vars += add(sign, "" + equation.charAt(i), left);
+			} else {
+				String number = "";
+				while (equation.length() >= i + 1 && equation.charAt(i) != '-' && equation.charAt(i) != '+' && equation.charAt(i) != '=') {
+					number += equation.charAt(i++);
+				}
+				if (!number.isEmpty()) {
+					i--;
+					if (number.contains("x")) {
+						x += add(sign, number.replaceAll("x", ""), !left);
+					} else {
+						y += add(sign, number, left);
+					}
+				}
 			}
 			sign = "";
-			if (equation.charAt(i) == '-' || equation.charAt(i) == '+')
+			if (i < equation.length() && (equation.charAt(i) == '-' || equation.charAt(i) == '+'))
 				sign = "" + equation.charAt(i);
 		}
-		if (x == 0 && vars == 0)
+		if (x == 0 && y == 0)
 			return "Infinite solutions";
-		if (x == 0 && vars != 0)
+		if (x == 0 && y != 0)
 			return "No solution";
-		return "x=" + (vars / x);
+		return "x=" + (y / x);
 	}
 
 	private int add(String sign, String number, boolean left) {
@@ -101,6 +105,8 @@ public class EquationSolver {
 		Test.equals(solver.solve("x=x+2"), "No solution");
 		Test.equals(solver.solve("2x+3x-6x=x+2"), "x=-1");
 		Test.equals(solver.solve("3x=33+22+11"), "x=22");
+		Test.equals(solver.solve("x=100"), "x=100");
+		Test.equals(solver.solve("-12x+2x=-100"), "x=10");
 	}
 
 }
