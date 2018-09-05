@@ -1,8 +1,11 @@
 package algoritmhs;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Scanner;
+import java.util.Map.Entry;
+
+import utils.test.Test;
 
 /**
  * Find the Most Popular Destination:
@@ -39,18 +42,19 @@ import java.util.Scanner;
  */
 public class MostPopularDestination {
 
-	static void OutputMostPopularDestination(int count, Scanner in) {
-		Map<String, Integer> des = new HashMap<>();
-		for (int i = 0; i < count; i++) {
-			String city = in.next();
+	static String commonDestination(String[] in) {
+		// loading data, counting presences
+		final Map<String, Integer> des = new HashMap<>();
+		for (int i = 0; i < in.length; i++) {
+			String city = in[i];
 			if (des.containsKey(city)) {
-				int tot = des.get(city);
-				des.put(city, tot + 1);
+				des.put(city, des.get(city) + 1);
 			} else {
 				des.put(city, 1);
 			}
 		}
 
+		// calculating most popular
 		int max = 0;
 		String destination = "";
 		for (String s : des.keySet()) {
@@ -59,15 +63,21 @@ public class MostPopularDestination {
 				destination = s;
 			}
 		}
-		System.out.println(destination);
+
+		// sample how to calculate in java 8
+		String functionalDestination = des.entrySet().stream()
+				.max(Comparator.comparing(Entry::getValue))
+				.map(Entry::getKey)
+				.get();
+
+		assert functionalDestination.equals(destination);
+
+		return destination;
 	}
 
-	public static void main(String args[]) throws Exception {
-		Scanner in = new Scanner(System.in);
-		int _count;
-		_count = Integer.parseInt(in.nextLine());
-
-		OutputMostPopularDestination(_count, in);
+	public static void main(String[] args) {
+		Test.equals("Barcelona", commonDestination(new String[] { "Barcelona", "Edinburgh", "Barcelona", "Miami", "Miami", "Barcelona" }));
+		Test.equals("Singapore", commonDestination(new String[] { "Singapore", "Bangkok", "Singapore", "Bangkok", "Singapore", "Barcelona" }));
 	}
 
 }
