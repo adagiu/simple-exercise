@@ -9,8 +9,6 @@ import java.util.stream.Stream;
 import utils.test.Test;
 
 /**
- * 
- * 
  * Find the Most Popular Destination:
  * 
  * Your task is to find the most popular holiday destination from a list of destinations searched for by users. You are given as standard input the
@@ -43,7 +41,7 @@ import utils.test.Test;
  * @author giuseppe.adaldo
  *
  */
-public class CommonDestination {
+public class MostPopularDestinationV2 {
 
 	private static String commonDestination(String[] destinations) {
 		return Stream.of(destinations)
