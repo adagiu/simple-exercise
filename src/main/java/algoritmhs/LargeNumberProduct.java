@@ -22,34 +22,34 @@ public class LargeNumberProduct {
 		num1 = new StringBuilder(num1).reverse().toString();
 		num2 = new StringBuilder(num2).reverse().toString();
 
-		int[][] partial = new int[2 * num1.length()][num2.length() * num1.length() + 1];
+		String tmp = "";
+		String product = "";
 
-		for (int i = 0, offset = 0; i < num1.length(); i++, offset++) {
+		for (int i = 0; i < num1.length(); i++) {
 			int rest = 0;
 			for (int k = 0; k < num2.length(); k++) {
 				int prod = getInt(num1, i) * getInt(num2, k);
-				int res = (prod + rest) % 10;
-				partial[i][k + offset] = res;
-				rest = (prod + rest) / 10;
+				System.out.println(getInt(num1, i) + "*" + getInt(num2, k) + "+" + tmp);
+				if (!tmp.isEmpty()) {
+					prod += getInt(tmp, k);
+					tmp = tmp.substring(1);
+				}
+				rest = prod / 10;
+				tmp += "" + (prod % 10);
 			}
-			if (rest > 0)
-				partial[i][offset + num2.length()] = rest;
-		}
-
-		String sum = "";
-		int rest = 0;
-		for (int k = 0; k < partial[0].length; k++) {
-			int partialSum = 0;
-			for (int i = 0; i < partial.length; i++) {
-				partialSum += partial[i][k];
+			if (rest > 0) {
+				tmp += "" + rest;
 			}
-			sum += (partialSum + rest) % 10;
-			rest = (partialSum + rest) / 10;
+			System.out.println("tmp1 " + tmp);
+			product += "" + tmp.charAt(0);
+			System.out.println("product " + product);
+			tmp = tmp.substring(1);
+			System.out.println("tmp2 " + tmp);
 		}
-		if (rest > 0)
-			sum += rest;
+		if (!tmp.isEmpty())
+			product += tmp;
 
-		return new StringBuilder(sum).reverse().toString().replaceFirst("^0+(?!$)", "");
+		return new StringBuilder(product).reverse().toString();
 	}
 
 	private static int getInt(String s, int i) {
@@ -58,15 +58,15 @@ public class LargeNumberProduct {
 
 	public static void main(String[] args) {
 		LargeNumberProduct l = new LargeNumberProduct();
-		Test.equals(l.solution("9133", "0"), "0");
-		Test.equals(l.solution("408", "5"), "2040");
-		Test.equals(l.solution("9", "9"), "81");
+		// Test.equals(l.solution("9133", "0"), "0");
+		// Test.equals(l.solution("408", "5"), "2040");
+		// Test.equals(l.solution("9", "9"), "81");
 		Test.equals(l.solution("999", "999"), "998001");
-		Test.equals(l.solution("222", "222"), "49284");
-		Test.equals(l.solution("987348734687462", "23984987238757"), "23681546801681646980768364734");
-		Test.equals(l.solution("76240047126666041961133788375854678695507175099108423713540245804984464373874905749210597511224714",
-				"50508987390094918079940272645150122130992191514531426745139766970214425636907460704571014980779812464"),
-				"3850807578941017405043936428334617006206578681059793185019338920318752709804789931220097477302896139962461703898399750453490343458217019930720602316843466382402743174163712702358367940356131882035296");
+		// Test.equals(l.solution("222", "222"), "49284");
+		// Test.equals(l.solution("987348734687462", "23984987238757"), "23681546801681646980768364734");
+		// Test.equals(l.solution("76240047126666041961133788375854678695507175099108423713540245804984464373874905749210597511224714",
+		// "50508987390094918079940272645150122130992191514531426745139766970214425636907460704571014980779812464"),
+		// "3850807578941017405043936428334617006206578681059793185019338920318752709804789931220097477302896139962461703898399750453490343458217019930720602316843466382402743174163712702358367940356131882035296");
 	}
 
 }
