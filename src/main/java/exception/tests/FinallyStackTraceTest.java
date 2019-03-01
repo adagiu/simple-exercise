@@ -3,7 +3,7 @@ package exception.tests;
 public class FinallyStackTraceTest {
 
 	/**
-	 * hello 1, then finally and at the end the RuntimeException
+	 * hello 1, then RuntimeException and at the end Finally
 	 * 
 	 * @param args
 	 */
