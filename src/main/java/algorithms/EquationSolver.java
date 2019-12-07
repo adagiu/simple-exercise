@@ -38,7 +38,7 @@ import utils.test.Test;
  */
 public class EquationSolver {
 
-	public String solve(String equation) {
+	private String solve(String equation) {
 		if (equation == null || equation.trim().isEmpty())
 			return "Invalid";
 
@@ -89,7 +89,7 @@ public class EquationSolver {
 	}
 
 	private static int getCorrectInt(String s, boolean left) {
-		return left ? -1 * Integer.valueOf(s) : Integer.valueOf(s);
+		return left ? -1 * Integer.parseInt(s) : Integer.parseInt(s);
 	}
 
 	public static void main(String[] args) {

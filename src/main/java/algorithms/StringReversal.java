@@ -4,7 +4,7 @@ import utils.test.Test;
 
 public class StringReversal {
 
-	public static String reverseString(String s) {
+	private static String reverseString(String s) {
 		char[] sArr = s.toCharArray();
 		int r = s.length() - 1;
 		int l = 0;

@@ -5,11 +5,11 @@ import utils.test.Test;
 /**
  * given 2 large binary trees T1 and T2, determine if T2 is a subtree of T1. A tree T2 is a subtree of T1 if there exists a node in T1 such that the
  * subtree of n is identical to T2. That is, if you cut off the tree at node n, the two trees would be identical.
- * 
+ *
  */
 public class CheckSubtree {
 
-	public static boolean checkSubtree(Node t1, Node t2) {
+	private static boolean checkSubtree(Node t1, Node t2) {
 		Node t1Root = searchNodeN(t1, t2.getVal());
 		return identical(t1Root, t2);
 	}
@@ -28,7 +28,7 @@ public class CheckSubtree {
 		return searchNodeN(t1.getRight(), val);
 	}
 
-	public static boolean identical(Node t1, Node t2) {
+	private static boolean identical(Node t1, Node t2) {
 		if (t1 == null && t2 == null)
 			return true;
 

@@ -35,7 +35,7 @@ import utils.test.Test;
  */
 public class CommonAnchestor {
 
-	public static int run(int index1, int index2) {
+	private static int run(int index1, int index2) {
 		if (index1 <= 1 || index1 >= 1000000 || index2 <= 1 || index2 >= 1000000)
 			return -1;
 

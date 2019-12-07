@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
  */
 public class SumNumbersOfString {
 
-    public int solution(String string) {
+    int solution(String string) {
         return string != null && !string.trim().isEmpty() ?
                 Pattern.compile("[^\\d-]").
                         splitAsStream(string).

@@ -6,7 +6,7 @@ package algorithms;
  */
 public class BinaryTreeDeletion {
 
-	public static Node removeZeros(Node root) {
+	private static Node removeZeros(Node root) {
 		if (root == null)
 			return null;
 
