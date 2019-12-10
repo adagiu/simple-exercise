@@ -22,7 +22,7 @@ public class MinSizeSubArrayEqualsToNumber {
 	 * @param a
 	 * @return
 	 */
-	public static int minSubArrayLen(int s, int[] a) {
+	private static int minSubArrayLen(int s, int[] a) {
 		int minimumLen = a.length + 1;
 		for (int i = 0; i < a.length; i++) {
 			int sum = 0;
@@ -43,7 +43,7 @@ public class MinSizeSubArrayEqualsToNumber {
 	 * @param nums
 	 * @return
 	 */
-	public static int minSubArrayLen3(int s, int[] nums) {
+	private static int minSubArrayLen3(int s, int[] nums) {
 		if (nums == null || nums.length == 0 || s == 0)
 			return 0;
 
